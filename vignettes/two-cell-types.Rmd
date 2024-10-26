@@ -1,0 +1,128 @@
+---
+title: "Two Cell Types"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Two Cell Types}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SplitClusterTest)
+```
+
+The simulated data `simdata_2ct` with two cell types is generated based on the real single-cell data `DuoClustering2018::sce_full_Zhengmix4eq()` with the help of `scDesign3`. For more details about generating synthetic data, please check our paper.
+
+The structure of `simdata_2ct` is as follows:
+
+```{r}
+str(simdata_2ct)
+```
+
+The true differentially expressed (DE) genes are 
+
+```{r}
+truth = names(simdata_2ct$de_idx)
+truth
+```
+
+## Step 1: Perform Testing-after-Clustering on Each Half via (Multiple) Data Splitting
+
+```{r}
+mss = mds1(simdata_2ct$simu_sce,
+     M = 1, # times of data splitting
+     params1 = list(normalized_method = "none"), # parameters for the first half
+     params2 = list(normalized_method = "none")) # parameters for the second half
+```
+
+It returns the mirror statistics,
+
+```{r hist-mirror-two, fig.alt="Histogram of Mirror Statistics (Two Cell Types)"}
+hist(mss[[1]], breaks = 50)
+cutoff = calc_tau(mss[[1]], q = 0.05)
+abline(v = cutoff, lwd = 2, col = "red")
+```
+
+In this step, `cutoff` is chosen to control the nominal False Discovery Rate (FDR) at `q = 0.05`.
+
+Note that the above histogram is for the results from the first data splitting `mss[[1]]`. If with multiple data splitting, we can aggregate the results by calculating the inclusion rate for each gene, and also calculate a cutoff. Then, either for DS or MDS, we can obtain the estimation of the significant DE gene set. We wrap this as the second step.
+
+For multiple data splitting (MDS), we can aggregate results by calculating the inclusion rate for each gene and determining a new cutoff. This allows us to estimate the set of significant DE genes, whether using DS or MDS. We wrap this process as the second step:
+
+## Step 2. Calculate Cutoff and Estimate the Selection Set
+
+```{r}
+sel = mds2(mss, q = 0.05)
+sel
+```
+
+we can also evaluate the accuracy
+
+```{r}
+calc_acc(sel, truth)
+```
+
+## A Whole Step
+
+As a whole, the above two steps `mds1` and `mds2` have been wrapped into a single function `mds`, and you can simply run the following command to obtain the selection set.
+
+```{r}
+sel = mds(simdata_2ct$simu_sce,
+     q = 0.05, 
+     M = 1, 
+     params1 = list(normalized_method = "none"), 
+     params2 = list(normalized_method = "none"))
+```
+
+As a comparison, we also check the naive double-dipping method.
+
+```{r}
+sel.dd = dd(simdata_2ct$simu_sce, params = list(normalized_method = "none"), q = 0.05, test.use = "t")
+```
+
+and the accuracy is
+
+```{r}
+calc_acc(sel.dd, truth)
+```
+
+## Normalization
+
+In practice, to account for the library size, a normalization method is needed. One suitable approach is the SCT transform.
+
+```{r}
+sel.sct = mds(simdata_2ct$simu_sce,
+     q = 0.05, 
+     M = 1, 
+     params1 = list(normalized_method = "sct"), 
+     params2 = list(normalized_method = "sct"))
+sel.dd.sct = dd(simdata_2ct$simu_sce, params = list(normalized_method = "sct"))
+sapply(list(ds = sel.sct, dd = sel.dd.sct), function(x) calc_acc(x, names(simdata_2ct$de_idx)))
+```
+
+## Whitening
+
+We recommend the whitening strategy for weak signal and (highly) correlated data. 
+
+```{r}
+sel = mds(simdata_2ct$simu_sce,
+     q = 0.05, 
+     M = 1, 
+     params1 = list(normalized_method = "sct", pca.whiten = TRUE), 
+     params2 = list(normalized_method = "sct", pca.whiten = TRUE))
+sel.dd = dd(simdata_2ct$simu_sce, params = list(normalized_method = "sct", pca.whiten = TRUE))
+sapply(list(ds = sel, dd = sel.dd), function(x) calc_acc(x, names(simdata_2ct$de_idx)))
+```
+
+## Session Info
+
+```{r}
+sessionInfo()
+```

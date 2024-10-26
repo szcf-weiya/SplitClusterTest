@@ -1,0 +1,61 @@
+---
+title: "One Cell Type"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{One Cell Type}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SplitClusterTest)
+```
+
+The simulated data `simdata_1ct` with one cell type (i.e., no cluster structure) is generated based on the real single-cell data `DuoClustering2018::sce_full_Zhengmix4eq()` with the help of `scDesign3`. For more details about generating synthetic data, please check our paper.
+
+The structure of `simdata_1ct` is as follows:
+
+```{r}
+str(simdata_1ct)
+```
+
+Since there is no cluster structure, so the index of DE genes is empty:
+
+```{r}
+simdata_1ct$de_idx
+```
+
+Our proposed multiple data splitting (MDS) does not return significant DE genes:
+
+```{r}
+mss = mds1(simdata_1ct$simu_sce, M = 1, 
+           params1 = list(normalized_method = "sct", pca.whiten = TRUE),
+           params2 = list(normalized_method = "sct", pca.whiten = TRUE))
+sel = mds2(mss)
+```
+
+The mirror statistics are distributed as follows:
+
+```{r hist-mirror-one, fig.alt="Histogram of Mirror Statistics (One Cell Type)"}
+hist(mss[[1]], breaks = 50)
+```
+
+However, the naive double-dipping method will return many false positives:
+
+```{r}
+sel.dd = dd(simdata_1ct$simu_sce, params = list(normalized_method = "sct", pca.whiten = TRUE))
+length(sel.dd)
+```
+
+## Session Info
+
+```{r}
+sessionInfo()
+```

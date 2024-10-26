@@ -1,0 +1,34 @@
+Package: SplitClusterTest
+Type: Package
+Title: FDR Control via Data Splitting for Testing-after-Clustering
+Version: 0.1.0
+Authors@R: c(
+    person("Lijun", "Wang", email = "lijun.wang@yale.edu", role = c("aut", "cre")),
+    person("Yingxin", "Lin", email = "yingxin.lin@yale.edu", role = c("aut")))
+Description: FDR Control via Data Splitting for Testing-after-Clustering
+    Particularly, in single-cell community, testing-after-clustering aims to identify differentially expressed (DE) genes across
+    different cell types (or along pseudotime). However, the naive testing-after-clustering will inflate the false positives, which 
+    is also referred as the double-dipping issue.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/szcf-weiya/SplitClusterTest
+BugReports: https://github.com/szcf-weiya/SplitClusterTest/issues
+Suggests: 
+    testthat (>= 3.0.0),
+    pbmcapply,
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    Seurat,
+    SingleCellExperiment,
+    future,
+    pbapply,
+    future.apply,
+    MASS
+VignetteBuilder: knitr
