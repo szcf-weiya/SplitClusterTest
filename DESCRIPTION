@@ -30,5 +30,7 @@ Imports:
     future,
     pbapply,
     future.apply,
-    MASS
+    MASS,
+    Matrix
+Remotes: satijalab/Seurat@v4.4.0, Matrix@1.6-5
 VignetteBuilder: knitr
