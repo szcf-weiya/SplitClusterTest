@@ -7,7 +7,7 @@ An R package for
 
 ## :hammer_and_wrench: Installation
 
-For single-cell data analysis, this package depends on `Seurat`. Since there are potential compatibility issue across different major versions of Seurat. We recommended Seurat v4, and it can be installed via the following command:
+For single-cell data analysis, this package depends on [Seurat](https://github.com/satijalab/Seurat). Since there are potential compatibility issue across different major versions of Seurat. We recommend [Seurat v4](https://github.com/satijalab/seurat/tree/v4.4.0), and it can be installed via the following command:
 
 ```r
 devtools::install_github("satijalab/seurat@v4.4.0")
