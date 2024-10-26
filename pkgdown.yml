@@ -1,0 +1,10 @@
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  one-cell-type: one-cell-type.html
+  two-cell-types: two-cell-types.html
+last_built: 2024-10-26T08:19Z
+urls:
+  reference: https://hohoweiya.xyz/SplitClusterTest/reference
+  article: https://hohoweiya.xyz/SplitClusterTest/articles
