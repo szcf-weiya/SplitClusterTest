@@ -8,6 +8,10 @@ The proposed approach addresses the double-dipping issue in testing-after-cluste
 
 ![dd](https://github.com/user-attachments/assets/e5383503-2e4d-45d0-adff-77f3a0f82899)
 
+![xkcd](https://github.com/user-attachments/assets/8de07b78-8346-4316-ae8c-855c305d625f)
+
+> The xkcd-style cartoon is drawn with the help of R package [xkcd](https://xkcd.r-forge.r-project.org/)
+
 
 ## :hammer_and_wrench: Installation
 
