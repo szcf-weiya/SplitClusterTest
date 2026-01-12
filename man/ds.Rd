@@ -2,36 +2,15 @@
 % Please edit documentation in R/split_cluster_test.R
 \name{ds}
 \alias{ds}
-\title{Data Splitting for Seurat object}
+\title{DS procedure}
 \usage{
-ds(
-  sce,
-  params1 = NULL,
-  params2 = NULL,
-  seed = NA,
-  test.use = "t",
-  signal_measurement = "tstat",
-  test.from.raw = TRUE
-)
+ds(x, ...)
 }
 \arguments{
-\item{sce}{A SingleCellExperiment object}
+\item{x}{data matrix or SingleCellExperiment object}
 
-\item{params1}{list of parameters to be passed to \code{perform_clustering} for the first half of the data splitting}
-
-\item{params2}{list of parameters to be passed to \code{perform_clustering} for the second half of the data splitting.}
-
-\item{seed}{random seed for reproducibility}
-
-\item{test.use}{The hypothesis testing for DE test. Possible choices: \code{t}, \code{wilcox}, \code{poisson}, and \code{negbinom}}
-
-\item{signal_measurement}{the signal measurement. Possible choices: the test statistic \code{tstat}, or the signed p-value \code{pval}}
-
-\item{test.from.raw}{whether to perform the testing on the original data without normalization or on the normalized data}
-}
-\value{
-a vector of mirror statistics
+\item{...}{optional arguments}
 }
 \description{
-Data Splitting for Seurat object
+DS procedure
 }

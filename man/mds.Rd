@@ -2,36 +2,15 @@
 % Please edit documentation in R/split_cluster_test.R
 \name{mds}
 \alias{mds}
-\title{Multiple data splitting}
+\title{MDS procedure}
 \usage{
-mds(
-  sce,
-  ncores = 1,
-  M = 10,
-  q = 0.05,
-  tied.method = "fair",
-  sum_in_denom = TRUE,
-  ...
-)
+mds(x, ...)
 }
 \arguments{
-\item{sce}{A SingleCellExperiment object}
+\item{x}{data matrix or SingleCellExperiment object}
 
-\item{ncores}{If larger than 1, then compute in parallel with \code{ncores} cores.}
-
-\item{M}{The number of data splitting}
-
-\item{q}{The nominal FDR level (default: 0.05)}
-
-\item{tied.method}{The method for handling the tied values.}
-
-\item{sum_in_denom}{when calculating the inclusion rate, use the modified inclusion rate (\code{TRUE}) or the original inclusion rate (\code{FALSE})}
-
-\item{...}{arguments passed to \code{mds1} (or \code{mds1_parallel})}
-}
-\value{
-the selected relevant features
+\item{...}{optional arguments}
 }
 \description{
-Multiple data splitting
+MDS procedure
 }

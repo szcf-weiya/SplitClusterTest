@@ -1,5 +1,7 @@
 # SplitClusterTest
 
+[![CI](https://github.com/szcf-weiya/SplitClusterTest/actions/workflows/CI.yaml/badge.svg)](https://github.com/szcf-weiya/SplitClusterTest/actions/workflows/CI.yaml)
+
 An R package for 
 
 > Wang, L., Lin, Y., & Zhao, H. (2024). False Discovery Rate Control via Data Splitting for Testing-after-Clustering (arXiv:2410.06451). arXiv. <https://doi.org/10.48550/arXiv.2410.06451>
@@ -26,6 +28,8 @@ then you can install our package via
 ```r
 devtools::install_github("szcf-weiya/SplitClusterTest")
 ```
+
+For potential compatibility issues, you may need to install `Matrix` with version `1.6-5` or an older one.
 
 ## :arrow_right: See also
 

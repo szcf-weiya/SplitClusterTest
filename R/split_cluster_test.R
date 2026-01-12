@@ -1,4 +1,61 @@
-#' Data Splitting for Seurat object
+#' DS procedure
+#' @param x data matrix or SingleCellExperiment object
+#' @param ... optional arguments
+#' @export
+ds = function(x, ...) UseMethod("ds")
+
+#' MDS procedure
+#' @param x data matrix or SingleCellExperiment object
+#' @param ... optional arguments
+#' @export
+mds = function(x, ...) UseMethod("mds")
+
+#' DS procedure for Matrix
+#' @param x data matrix
+#' @param kmeans_whiten whether to perform the whitening procedure for kmean
+#' @param Sigma the covariance matrix, if null, estimate from the data
+#' @param q the nominal FDR level
+#' @param debias whether to debias (useful when correlation is high)
+#' @return a list with the selected set, the mirror statistics, two signal measurements for two halves
+#' @export
+ds.matrix = function(x, kmeans_whiten = FALSE, Sigma = NULL, q = 0.05, debias = FALSE) {
+  n = nrow(x)
+  n2 = floor(n/2)
+  idx1 = sample(1:n, n2, replace = FALSE)
+  idx2 = setdiff(1:n, idx1)
+  x1 = x[idx1, ]
+  x2 = x[idx2, ]
+  if (kmeans_whiten) {
+    p = ncol(x)
+    if (is.null(Sigma)) {
+      Sigma = est.Sigma(x) + 1e-6 * diag(p)
+    }
+    ev = eigen(Sigma)
+    idx = ev$values > 0
+    xc = x %*% ev$vectors[, idx] %*% diag(1 / sqrt(ev$values[idx])) %*% t(ev$vectors[, idx])
+    x1c = xc[idx1, ]
+    x2c = xc[idx2, ]
+  } else {
+    x1c = x1
+    x2c = x2
+  }
+  cl1 = kmeans(x1c, 2)$cluster
+  cl2 = kmeans(x2c, 2)$cluster
+  d1 = cluster_diff(x1, cl1)
+  d2 = cluster_diff(x2, cl2)
+  if (debias) {
+    d1 = debias_symmetry(d1)
+    d2 = debias_symmetry(d2)
+  }
+  ms = mirror_stat(d1, d2)
+  tau = calc_tau(ms, q)
+  m_sel = which(ms > tau)
+  names(ms) = 1:length(ms) # to be compatible with gene names
+  list(sel_set = m_sel, ms = ms, d1 = d1, d2 = d2)
+}
+
+
+#' DS procedure for Seurat object
 #' @param sce A SingleCellExperiment object
 #' @param params1 list of parameters to be passed to `perform_clustering` for the first half of the data splitting
 #' @param params2 list of parameters to be passed to `perform_clustering` for the second half of the data splitting.
@@ -8,7 +65,7 @@
 #' @importFrom stats runif
 #' @import Seurat
 #' @export
-ds = function(sce, params1 = NULL, params2 = NULL,
+ds.SingleCellExperiment = function(sce, params1 = NULL, params2 = NULL,
               seed = NA,
               test.use = "t",
               signal_measurement = "tstat",
@@ -214,6 +271,33 @@ sel_inc_rate = function(inc_rate, q = 0.05, tied.method = "fair", tol = 1e-10) {
   }
 }
 
+#' MDS procedure for matrix
+#' @param x data matrix
+#' @param M number of repetitions
+#' @param q nominal FDR level
+#' @param ncores number of cores
+#' @param tied.method handling the tied values when determing the cutoff
+#' @param sum_in_denom way for calculating the inclusion rate
+#' @param ... optional arguments passed to `ds.matrix`
+#' @return a list of mirror statistics
+#' @export
+mds.matrix = function(x, M = 10, q = 0.05,
+                      ncores = 1,
+                      tied.method = "fair", sum_in_denom = TRUE, ...) {
+  mss = list()
+  if (ncores == 1) {
+    for (i in 1:M) {
+      mss[[i]] = ds.matrix(x, ...)$ms
+    }
+  } else {
+    mss <- pbmcapply::pbmclapply(1:M, function(i) {
+      ds(x, ...)$ms
+    }, mc.cores = ncores)
+  }
+  sel = mds2(mss, q = q, tied.method = tied.method, sum_in_denom = sum_in_denom)
+  return(sel)
+}
+
 #' Aggregate multiple data splitting results, and return a selection set
 #' @param mss A list, which contains the selections from multiple data splitting procedures
 #' @param q The nominal FDR level (default: 0.05)
@@ -241,7 +325,7 @@ mds2 = function(mss, q = 0.05, tied.method = "fair", sum_in_denom = TRUE) {
 #' @param ... arguments passed to `mds1` (or `mds1_parallel`)
 #' @return the selected relevant features
 #' @export
-mds = function(sce, ncores = 1, M = 10, q = 0.05,
+mds.SingleCellExperiment = function(sce, ncores = 1, M = 10, q = 0.05,
                tied.method = "fair", sum_in_denom = TRUE, ...) {
   if (ncores > 1) {
     mss = mds1_parallel(sce, M = M, ncores = ncores, ...)
@@ -416,36 +500,4 @@ perform_clustering = function(sce,
     pval = -log10(markers$p_val) * sign(markers$tstat)
   names(pval) = rownames(markers)
   pval
-}
-
-#' Calculate the accuracy (FDR, Power, F1 score) if truth is available
-#' @param est the selected relavent features
-#' @param truth A vector of the true relevant features
-#' @return a vector of size three: fdr, power, and F1 score
-#' @export
-calc_acc = function(est, truth) {
-  if (length(truth) == 0) { # truth is empty
-    if (length(est) == 0) {
-      fdr = 0
-      power = 1
-      f1 = 1
-    } else {
-      fdr = 1
-      power = 0
-      f1 = 0
-    }
-  } else if (length(est) == 0) { # truth is not empty but return nothing
-    fdr = 0
-    power = 0
-    f1 = 0
-  } else {
-    tp = length(intersect(est, truth))
-    precision = tp / length(est)
-    recall = tp / length(truth)
-    f1 = 2 * precision * recall / (precision + recall)
-    if (is.nan(f1)) f1 = 0 # 0/0
-    power = recall
-    fdr = 1 - precision
-  }
-  return(c(fdr = fdr, power = power, f1 = f1))
 }
