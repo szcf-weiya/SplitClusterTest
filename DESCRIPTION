@@ -32,5 +32,5 @@ Imports:
     future.apply,
     MASS,
     Matrix
-Remotes: satijalab/Seurat@v4.4.0, SeuratObject@5.0.2, Matrix@1.6-5
+Remotes: SeuratObject@5.0.2, satijalab/Seurat@v4.4.0, Matrix@1.6-5
 VignetteBuilder: knitr
