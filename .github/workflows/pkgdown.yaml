@@ -35,6 +35,11 @@ jobs:
           use-public-rspm: true
           r-version: '4.1'
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get -y install libcurl4-openssl-dev libssl-dev make zlib1g-dev libglpk-dev libxml2-dev pandoc libpng-dev python3 libicu-dev
+
       - name: Cache renv library
         uses: actions/cache@v3
         with:
