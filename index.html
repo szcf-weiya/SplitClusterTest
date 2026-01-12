@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">SplitClusterTest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/one-cell-type.html">One Cell Type</a></li>
     <li><a class="dropdown-item" href="articles/two-cell-types.html">Two Cell Types</a></li>
+    <li><a class="dropdown-item" href="articles/two-gaussians.html">Two Gaussians</a></li>
   </ul>
 </li>
       </ul>
@@ -55,6 +56,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="splitclustertest">SplitClusterTest<a class="anchor" aria-label="anchor" href="#splitclustertest"></a>
 </h1></div>
+<p><a href="https://github.com/szcf-weiya/SplitClusterTest/actions/workflows/CI.yaml" class="external-link"><img src="https://github.com/szcf-weiya/SplitClusterTest/actions/workflows/CI.yaml/badge.svg" alt="CI"></a></p>
 <p>An R package for</p>
 <blockquote>
 <p>Wang, L., Lin, Y., &amp; Zhao, H. (2024). False Discovery Rate Control via Data Splitting for Testing-after-Clustering (arXiv:2410.06451). arXiv. <a href="https://doi.org/10.48550/arXiv.2410.06451" class="external-link uri">https://doi.org/10.48550/arXiv.2410.06451</a></p>
@@ -79,6 +81,7 @@
 <p>then you can install our package via</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szcf-weiya/SplitClusterTest"</span><span class="op">)</span></span></code></pre></div>
+<p>For potential compatibility issues, you may need to install <code>Matrix</code> with version <code>1.6-5</code> or an older one.</p>
 </div>
 <div class="section level2">
 <h2 id="arrow_right-see-also">
@@ -119,9 +122,9 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://hohoweiya.xyz" class="external-link">Lijun Wang</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<a href="https://hohoweiya.xyz" class="external-link">Lijun Wang</a> <br><small class="roles"> Author, maintainer </small>   </li>
 <li>
-<a href="https://yingxinlin.github.io/" class="external-link">Yingxin Lin</a> <br><small class="roles"> Author </small>  </li>
+<a href="https://yingxinlin.github.io/" class="external-link">Yingxin Lin</a> <br><small class="roles"> Author </small>   </li>
 </ul>
 </div>
 
@@ -136,7 +139,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
