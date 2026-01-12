@@ -26,6 +26,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     Seurat,
+    SeuratObject (<= 5.0.2),
     SingleCellExperiment,
     future,
     pbapply,
