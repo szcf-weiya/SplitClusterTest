@@ -35,10 +35,26 @@ jobs:
           use-public-rspm: true
           r-version: '4.1'
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Cache renv library
+        uses: actions/cache@v3
         with:
-          extra-packages: any::pkgdown, any::earth, local::.
-          needs: website
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Install R package dependencies
+        run: |
+          install.packages("renv")
+          renv::restore()
+        shell: Rscript {0}
+
+      - name: Install pkgdown and build website
+        shell: Rscript {0}
+        run: |
+          # Install pkgdown through renv
+          renv::install("pkgdown")
+          renv::install(".")
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
