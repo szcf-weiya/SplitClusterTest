@@ -1,3 +1,18 @@
+test_that("ds", {
+  set.seed(1234)
+  x = matrix(rnorm(8000), nrow = 80, ncol = 100)
+  x[1:40,1:10] = x[1:40, 1:10] + 10
+  res = ds(x, q = 0.1)
+  acc = calc_acc(res$sel_set, 1:10)
+  expect_lte(acc$fdr, 0.1)
+  expect_gte(acc$power, 0.9)
+
+  res2 = mds(x, q = 0.1, M = 10)
+  acc2 = calc_acc(res2, 1:10)
+  expect_lte(acc2$fdr, 0.1)
+  expect_gte(acc2$power, 0.9)
+})
+
 test_that("calc_tau", {
   ms = seq(-1, 1, by = 0.01)
   expect_equal(calc_tau(ms), 1)

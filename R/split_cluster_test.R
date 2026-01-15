@@ -49,7 +49,7 @@ ds.matrix = function(x, kmeans_whiten = FALSE, Sigma = NULL, q = 0.05, debias = 
   }
   ms = mirror_stat(d1, d2)
   tau = calc_tau(ms, q)
-  m_sel = which(ms > tau)
+  m_sel = which(ms >= tau) # >= consistent with the FDR calculation
   names(ms) = 1:length(ms) # to be compatible with gene names
   list(sel_set = m_sel, ms = ms, d1 = d1, d2 = d2)
 }
@@ -201,7 +201,7 @@ calc_inc_rate = function(mss, q = 0.05, sum_in_denom = TRUE) {
   for (i in 1:M) {
     if (length(mss[[i]]) > 0) {
       taus[i] = calc_tau(mss[[i]], q = q)
-      rs[i, names(mss[[i]])] = mss[[i]] > taus[i]
+      rs[i, names(mss[[i]])] = mss[[i]] >= taus[i]
       if (!sum_in_denom) rs[i, ] = rs[i, ] / max(1, sum(rs[i, ])) # rs[i, ] can be zero
     }
   }
