@@ -37,8 +37,8 @@ features are `1:20`:
 
 ``` r
 calc_acc(res$sel_set, 1:20)
-#>      fdr    power       f1 
-#> 0.000000 0.950000 0.974359
+#>   fdr power    f1 
+#>     0     1     1
 ```
 
 The histogram of the mirror statistics is
@@ -63,6 +63,6 @@ Check the accuracy of the selected set
 
 ``` r
 calc_acc(res, 1:20)
-#>      fdr    power       f1 
-#> 0.000000 0.950000 0.974359
+#>   fdr power    f1 
+#>     0     1     1
 ```

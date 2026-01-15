@@ -164,6 +164,7 @@ mss = mds1(simdata_1ct$simu_sce, M = 1,
 #> 
 #> ----- data splitting (2nd half) ----
 sel = mds2(mss)
+#> use the tie.method =  fair
 ```
 
 The mirror statistics are distributed as follows:
@@ -207,7 +208,7 @@ sessionInfo()
 #> [1] stats     graphics  grDevices datasets  utils     methods   base     
 #> 
 #> other attached packages:
-#> [1] future_1.68.0          SplitClusterTest_0.1.1
+#> [1] future_1.68.0          SplitClusterTest_0.1.2
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] spatstat.univar_3.0-1       spam_2.11-0                

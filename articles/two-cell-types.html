@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SplitClusterTest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
       <h1>Two Cell Types</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/v0.1.1/vignettes/two-cell-types.Rmd" class="external-link"><code>vignettes/two-cell-types.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/master/vignettes/two-cell-types.Rmd" class="external-link"><code>vignettes/two-cell-types.Rmd</code></a></small>
       <div class="d-none name"><code>two-cell-types.Rmd</code></div>
     </div>
 
@@ -261,13 +261,13 @@ whether using DS or MDS. We wrap this process as the second step:</p>
 <span><span class="co">#&gt;  [9] "ENSG00000142676" "ENSG00000145425" "ENSG00000105372" "ENSG00000083845"</span></span>
 <span><span class="co">#&gt; [13] "ENSG00000166441" "ENSG00000122026" "ENSG00000143947" "ENSG00000205542"</span></span>
 <span><span class="co">#&gt; [17] "ENSG00000034510" "ENSG00000109475" "ENSG00000251562" "ENSG00000147604"</span></span>
-<span><span class="co">#&gt; [21] "ENSG00000138326" "ENSG00000102879" "ENSG00000116251" "ENSG00000185201"</span></span>
-<span><span class="co">#&gt; [25] "ENSG00000140319" "ENSG00000148908"</span></span></code></pre></div>
+<span><span class="co">#&gt; [21] "ENSG00000138326" "ENSG00000140264" "ENSG00000102879" "ENSG00000116251"</span></span>
+<span><span class="co">#&gt; [25] "ENSG00000185201" "ENSG00000140319" "ENSG00000148908"</span></span></code></pre></div>
 <p>we can also evaluate the accuracy</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">sel</span>, <span class="va">truth</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       fdr     power        f1 </span></span>
-<span><span class="co">#&gt; 0.2307692 1.0000000 0.8695652</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.2592593 1.0000000 0.8510638</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-whole-step">A Whole Step<a class="anchor" aria-label="anchor" href="#a-whole-step"></a>
@@ -319,10 +319,10 @@ is needed. One suitable approach is the SCT transform.</p>
 <span><span class="va">sel.dd.sct</span> <span class="op">=</span> <span class="fu"><a href="../reference/dd.html">dd</a></span><span class="op">(</span><span class="va">simdata_2ct</span><span class="op">$</span><span class="va">simu_sce</span>, params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>normalized_method <span class="op">=</span> <span class="st">"sct"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: The following arguments are not used: norm.method</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ds <span class="op">=</span> <span class="va">sel.sct</span>, dd <span class="op">=</span> <span class="va">sel.dd.sct</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">simdata_2ct</span><span class="op">$</span><span class="va">de_idx</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;               ds        dd</span></span>
-<span><span class="co">#&gt; fdr   0.09090909 0.8245614</span></span>
-<span><span class="co">#&gt; power 1.00000000 1.0000000</span></span>
-<span><span class="co">#&gt; f1    0.95238095 0.2985075</span></span></code></pre></div>
+<span><span class="co">#&gt;              ds        dd</span></span>
+<span><span class="co">#&gt; fdr   0.1304348 0.8245614</span></span>
+<span><span class="co">#&gt; power 1.0000000 1.0000000</span></span>
+<span><span class="co">#&gt; f1    0.9302326 0.2985075</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="whitening">Whitening<a class="anchor" aria-label="anchor" href="#whitening"></a>
@@ -346,9 +346,9 @@ correlated data.</p>
 <span><span class="co">#&gt; Warning: The following arguments are not used: norm.method</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ds <span class="op">=</span> <span class="va">sel</span>, dd <span class="op">=</span> <span class="va">sel.dd</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">simdata_2ct</span><span class="op">$</span><span class="va">de_idx</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               ds        dd</span></span>
-<span><span class="co">#&gt; fdr   0.04761905 0.8290598</span></span>
+<span><span class="co">#&gt; fdr   0.09090909 0.8290598</span></span>
 <span><span class="co">#&gt; power 1.00000000 1.0000000</span></span>
-<span><span class="co">#&gt; f1    0.97560976 0.2919708</span></span></code></pre></div>
+<span><span class="co">#&gt; f1    0.95238095 0.2919708</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
@@ -373,7 +373,7 @@ correlated data.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices datasets  utils     methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] future_1.68.0          SplitClusterTest_0.1.1</span></span>
+<span><span class="co">#&gt; [1] future_1.68.0          SplitClusterTest_0.1.2</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] spatstat.univar_3.0-1       spam_2.11-0                </span></span>

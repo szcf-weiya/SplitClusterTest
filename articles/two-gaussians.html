@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SplitClusterTest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
       <h1>Two Gaussians</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/v0.1.1/vignettes/two-gaussians.Rmd" class="external-link"><code>vignettes/two-gaussians.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/master/vignettes/two-gaussians.Rmd" class="external-link"><code>vignettes/two-gaussians.Rmd</code></a></small>
       <div class="d-none name"><code>two-gaussians.Rmd</code></div>
     </div>
 
@@ -97,8 +97,8 @@ features distinguish the two clusters:</p>
 features are <code>1:20</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">sel_set</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      fdr    power       f1 </span></span>
-<span><span class="co">#&gt; 0.000000 0.950000 0.974359</span></span></code></pre></div>
+<span><span class="co">#&gt;   fdr power    f1 </span></span>
+<span><span class="co">#&gt;     0     1     1</span></span></code></pre></div>
 <p>The histogram of the mirror statistics is</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">ms</span><span class="op">)</span></span></code></pre></div>
@@ -115,8 +115,8 @@ features are <code>1:20</code>:</p>
 <p>Check the accuracy of the selected set</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      fdr    power       f1 </span></span>
-<span><span class="co">#&gt; 0.000000 0.950000 0.974359</span></span></code></pre></div>
+<span><span class="co">#&gt;   fdr power    f1 </span></span>
+<span><span class="co">#&gt;     0     1     1</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

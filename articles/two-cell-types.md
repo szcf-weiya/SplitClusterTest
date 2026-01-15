@@ -209,8 +209,8 @@ sel
 #>  [9] "ENSG00000142676" "ENSG00000145425" "ENSG00000105372" "ENSG00000083845"
 #> [13] "ENSG00000166441" "ENSG00000122026" "ENSG00000143947" "ENSG00000205542"
 #> [17] "ENSG00000034510" "ENSG00000109475" "ENSG00000251562" "ENSG00000147604"
-#> [21] "ENSG00000138326" "ENSG00000102879" "ENSG00000116251" "ENSG00000185201"
-#> [25] "ENSG00000140319" "ENSG00000148908"
+#> [21] "ENSG00000138326" "ENSG00000140264" "ENSG00000102879" "ENSG00000116251"
+#> [25] "ENSG00000185201" "ENSG00000140319" "ENSG00000148908"
 ```
 
 we can also evaluate the accuracy
@@ -218,7 +218,7 @@ we can also evaluate the accuracy
 ``` r
 calc_acc(sel, truth)
 #>       fdr     power        f1 
-#> 0.2307692 1.0000000 0.8695652
+#> 0.2592593 1.0000000 0.8510638
 ```
 
 ## A Whole Step
@@ -277,10 +277,10 @@ sel.sct = mds(simdata_2ct$simu_sce,
 sel.dd.sct = dd(simdata_2ct$simu_sce, params = list(normalized_method = "sct"))
 #> Warning: The following arguments are not used: norm.method
 sapply(list(ds = sel.sct, dd = sel.dd.sct), function(x) calc_acc(x, names(simdata_2ct$de_idx)))
-#>               ds        dd
-#> fdr   0.09090909 0.8245614
-#> power 1.00000000 1.0000000
-#> f1    0.95238095 0.2985075
+#>              ds        dd
+#> fdr   0.1304348 0.8245614
+#> power 1.0000000 1.0000000
+#> f1    0.9302326 0.2985075
 ```
 
 ## Whitening
@@ -305,9 +305,9 @@ sel.dd = dd(simdata_2ct$simu_sce, params = list(normalized_method = "sct", pca.w
 #> Warning: The following arguments are not used: norm.method
 sapply(list(ds = sel, dd = sel.dd), function(x) calc_acc(x, names(simdata_2ct$de_idx)))
 #>               ds        dd
-#> fdr   0.04761905 0.8290598
+#> fdr   0.09090909 0.8290598
 #> power 1.00000000 1.0000000
-#> f1    0.97560976 0.2919708
+#> f1    0.95238095 0.2919708
 ```
 
 ## Session Info
@@ -332,7 +332,7 @@ sessionInfo()
 #> [1] stats     graphics  grDevices datasets  utils     methods   base     
 #> 
 #> other attached packages:
-#> [1] future_1.68.0          SplitClusterTest_0.1.1
+#> [1] future_1.68.0          SplitClusterTest_0.1.2
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] spatstat.univar_3.0-1       spam_2.11-0                
