@@ -35,6 +35,12 @@
 - [`gen_data_normal()`](https://hohoweiya.xyz/SplitClusterTest/reference/gen_data_normal.md)
   : Generate simulation data with two gaussians
 
+- [`gen_data_pois()`](https://hohoweiya.xyz/SplitClusterTest/reference/gen_data_pois.md)
+  : Generate Poisson data with latent structure
+
+- [`gen_data_pois.matrix()`](https://hohoweiya.xyz/SplitClusterTest/reference/gen_data_pois.matrix.md)
+  : Matrix method for gen_data_pois (S3)
+
 - [`mds()`](https://hohoweiya.xyz/SplitClusterTest/reference/mds.md) :
   MDS procedure
 

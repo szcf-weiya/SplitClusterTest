@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Two Gaussians • SplitClusterTest</title>
+<title>Two-Poissons • SplitClusterTest</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Two Gaussians">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Two-Poissons">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -58,60 +58,70 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Two Gaussians</h1>
+      <h1>Two-Poissons</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/master/vignettes/two-gaussians.Rmd" class="external-link"><code>vignettes/two-gaussians.Rmd</code></a></small>
-      <div class="d-none name"><code>two-gaussians.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/master/vignettes/two-poissons.Rmd" class="external-link"><code>vignettes/two-poissons.Rmd</code></a></small>
+      <div class="d-none name"><code>two-poissons.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/SplitClusterTest" class="external-link">SplitClusterTest</a></span><span class="op">)</span></span></code></pre></div>
-<p>Imagine you have data from two distinct clusters, each with 200
-features and 50 observations. The interesting part: only 10% of these
-features (20 features) actually differ between the groups. The remaining
-features are identically distributed. The magnitude of these differences
-is controlled by a parameter called <code>delta</code>.</p>
+<p>In many real-world applications—from genomics to social science—we
+encounter <strong>count data with inherent correlations</strong>.
+Traditional Poisson models often assume independence, but real data
+frequently exhibits feature dependencies. Here, we explore identifying
+distinguishing features when counts follow <strong>correlated Poisson
+distributions</strong> via Gaussian copula.</p>
 <div class="section level2">
-<h2 id="generating-example-data">Generating Example Data<a class="anchor" aria-label="anchor" href="#generating-example-data"></a>
+<h2 id="setting-up-the-simulation">Setting Up the Simulation<a class="anchor" aria-label="anchor" href="#setting-up-the-simulation"></a>
 </h2>
-<p>Let’s create such a dataset using the <code>gen_data_normal</code>
-function:</p>
+<p>Consider two distinct groups with:</p>
+<ul>
+<li>50 observations per group (100 total)</li>
+<li>200 features following Poisson distributions</li>
+<li>Only 20 features (10%) showing genuine differences</li>
+<li>Correlation structure among features (modeled by Gaussian
+copula)</li>
+</ul>
+<p>The simulation parameters:</p>
+<ul>
+<li>
+<code>delta</code>: Magnitude of difference between groups</li>
+<li>
+<code>rho</code>: Correlation parameter controlling feature
+dependencies</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/gen_data_normal.html">gen_data_normal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, p <span class="op">=</span> <span class="fl">200</span>, prop <span class="op">=</span> <span class="fl">0.1</span>, delta <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/gen_data_pois.html">gen_data_pois</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, p <span class="op">=</span> <span class="fl">200</span>, prop <span class="op">=</span> <span class="fl">0.1</span>, delta <span class="op">=</span> <span class="fl">5</span>, rho <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">X</span> <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">X</span></span>
 <span><span class="va">L</span> <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">L</span></span></code></pre></div>
-<p>In this example:</p>
-<ul>
-<li>Features 1 through 20 are truly different between clusters
-(<code>delta = 3</code>)</li>
-<li>Features 21 through 200 are identically distributed (no
-difference)</li>
-</ul>
+<p><strong>Ground Truth</strong>: Features 1–20 differ between groups
+(delta = 5), while features 21–200 are identical. All features share
+mild correlation (rho = 0.1).</p>
 </div>
 <div class="section level2">
-<h2 id="identifying-non-null-features-by-ds">Identifying Non-null Features by DS<a class="anchor" aria-label="anchor" href="#identifying-non-null-features-by-ds"></a>
+<h2 id="standard-ds-procedure">Standard DS Procedure<a class="anchor" aria-label="anchor" href="#standard-ds-procedure"></a>
 </h2>
-<p>Now, let’s use our DS procedure to automatically identify which
-features distinguish the two clusters while controlling the false
-discovery rate (FDR) at a nominal level of <code>q = 0.2</code>:</p>
+<p>Let’s start with the basic DS approach to identify differential
+features:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">res</span> <span class="op">=</span> <span class="fu"><a href="../reference/ds.html">ds</a></span><span class="op">(</span><span class="va">X</span>, q <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">sel_set</span><span class="op">)</span></span>
-<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span><span class="va">res</span> <span class="op">=</span> <span class="fu"><a href="../reference/ds.html">ds</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">sel_set</span></span>
+<span><span class="co">#&gt;  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19</span></span>
+<span><span class="co">#&gt; [20]  20  28 107 143</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="evaluating-performance">Evaluating Performance<a class="anchor" aria-label="anchor" href="#evaluating-performance"></a>
+<h2 id="performance-evaluation">Performance Evaluation<a class="anchor" aria-label="anchor" href="#performance-evaluation"></a>
 </h2>
-<p>We know the ground truth: features 1–20 are truly different. Let’s
-measure how accurately DS identified them:</p>
+<p>We can quantify how well DS performed against our known truth:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">sel_set</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="co">#&gt;        fdr      power         f1 </span></span>
-<span><span class="co">#&gt; 0.04761905 1.00000000 0.97560976</span></span></code></pre></div>
+<span><span class="co">#&gt;       fdr     power        f1 </span></span>
+<span><span class="co">#&gt; 0.1304348 1.0000000 0.9302326</span></span></code></pre></div>
 <p>This gives us:</p>
 <ul>
 <li>
@@ -128,44 +138,26 @@ recall</li>
 <div class="section level2">
 <h2 id="visualizing-mirror-statistics">Visualizing Mirror Statistics<a class="anchor" aria-label="anchor" href="#visualizing-mirror-statistics"></a>
 </h2>
-<p>DS uses mirror statistics to distinguish signal from noise. Let’s
-visualize their distribution:</p>
+<p>Understanding the selection process can be insightful:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">ms</span><span class="op">)</span></span></code></pre></div>
-<p><img src="two-gaussians_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="700"></p>
-<p><strong>Interpretation</strong>: Mirror statistics with large
-positive values suggest strong evidence of differences between
-clusters.</p>
+<p><img src="two-poissons_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
-<h2 id="a-more-robust-approach-mds">A More Robust Approach: MDS<a class="anchor" aria-label="anchor" href="#a-more-robust-approach-mds"></a>
+<h2 id="enhancing-robustness-with-mds">Enhancing Robustness with MDS<a class="anchor" aria-label="anchor" href="#enhancing-robustness-with-mds"></a>
 </h2>
-<p>For increased robustness against variability, you can use the MDS
-(Multiple DS) procedure, which aggregates results across multiple random
-splits:</p>
+<p>When dealing with correlated data, results can vary with different
+data splits. The Multiple DS (MDS) approach aggregates results across
+multiple random partitions for more stable feature selection:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">res</span> <span class="op">=</span> <span class="fu"><a href="../reference/mds.html">mds</a></span><span class="op">(</span><span class="va">X</span>, M <span class="op">=</span> <span class="fl">10</span>, q <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">=</span> <span class="fu"><a href="../reference/mds.html">mds</a></span><span class="op">(</span><span class="va">X</span>, M <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; use the tie.method =  fair</span></span></code></pre></div>
 <p>Check the accuracy of the selected set</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_acc.html">calc_acc</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   fdr power    f1 </span></span>
 <span><span class="co">#&gt;     0     1     1</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="key-takeaways">💡 Key Takeaways<a class="anchor" aria-label="anchor" href="#key-takeaways"></a>
-</h2>
-<ul>
-<li>DS provides a straightforward approach to feature selection with FDR
-control</li>
-<li>MDS offers enhanced robustness through aggregation across multiple
-random splits</li>
-<li>Both methods aim to identify the 20 truly different features while
-controlling false discoveries</li>
-<li>The histogram of mirror statistics helps visualize the separation
-between signal and noise</li>
-</ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

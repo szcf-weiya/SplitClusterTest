@@ -6,6 +6,7 @@
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/articles/one-cell-type.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/articles/two-cell-types.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/articles/two-gaussians.html</loc></url>
+<url><loc>https://hohoweiya.xyz/SplitClusterTest/articles/two-poissons.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/authors.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/index.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/calc_acc.html</loc></url>
@@ -19,6 +20,8 @@
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/ds.matrix.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/est.Sigma.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/gen_data_normal.html</loc></url>
+<url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/gen_data_pois.html</loc></url>
+<url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/gen_data_pois.matrix.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/index.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/mds.SingleCellExperiment.html</loc></url>
 <url><loc>https://hohoweiya.xyz/SplitClusterTest/reference/mds.html</loc></url>
