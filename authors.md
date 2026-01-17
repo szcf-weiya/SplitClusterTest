@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/szcf-weiya/SplitClusterTest/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/szcf-weiya/SplitClusterTest/blob/v0.1.3/DESCRIPTION)
 
 Wang L, Lin Y (2026). *SplitClusterTest: FDR Control via Data Splitting
 for Testing-after-Clustering*. R package version 0.1.3,
