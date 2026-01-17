@@ -1,16 +1,26 @@
 test_that("ds", {
   set.seed(1234)
-  x = matrix(rnorm(8000), nrow = 80, ncol = 100)
-  x[1:40,1:10] = x[1:40, 1:10] + 10
-  res = ds(x, q = 0.1)
+  data = gen_data_normal(80, 100, delta = 10)
+  X = data$X
+  res = ds(X, q = 0.1)
   acc = calc_acc(res$sel_set, 1:10)
   expect_lte(acc[["fdr"]], 0.1)
   expect_gte(acc[["power"]], 0.9)
 
-  res2 = mds(x, q = 0.1, M = 10)
+  res2 = mds(X, q = 0.1, M = 10)
   acc2 = calc_acc(res2, 1:10)
   expect_lte(acc2[["fdr"]], 0.1)
   expect_gte(acc2[["power"]], 0.9)
+})
+
+test_that("ds_pois", {
+  set.seed(1234)
+  data = gen_data_pois(n = 100, p = 20, prop = 0.5, delta = 10, rho = 0)
+  X = data$X
+  res = ds(X, q = 0.2)
+  acc = calc_acc(res$sel_set, 1:10)
+  expect_lte(acc[["fdr"]], 0.2)
+  expect_gte(acc[["power"]], 0.9)
 })
 
 test_that("calc_tau", {

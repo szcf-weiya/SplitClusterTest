@@ -1,7 +1,7 @@
 Package: SplitClusterTest
 Type: Package
 Title: FDR Control via Data Splitting for Testing-after-Clustering
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(
     person("Lijun", "Wang", email = "lijun.wang@yale.edu", role = c("aut", "cre")),
     person("Yingxin", "Lin", email = "yingxin.lin@yale.edu", role = c("aut")))
@@ -25,6 +25,7 @@ Depends:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
+    copula,
     Seurat,
     SingleCellExperiment,
     future,
