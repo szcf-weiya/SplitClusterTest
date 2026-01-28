@@ -48,7 +48,7 @@ perform_clustering(
 
   if `TRUE`, then clustering using kmeans with two clusters, otherwise,
   use
-  [`Seurat::FindClusters`](https://satijalab.org/seurat/reference/FindClusters.html)
+  [`Seurat::FindClusters`](https://rdrr.io/pkg/Seurat/man/FindClusters.html)
   and need to find `resolution` to achieve two clusters
 
 - kmeans.nstart:
@@ -58,7 +58,7 @@ perform_clustering(
 - resolution:
 
   the `resolution` parameter for
-  [`Seurat::FindClusters`](https://satijalab.org/seurat/reference/FindClusters.html)
+  [`Seurat::FindClusters`](https://rdrr.io/pkg/Seurat/man/FindClusters.html)
 
 - step:
 
@@ -72,17 +72,17 @@ perform_clustering(
 - louvain.nstart:
 
   the `n.start` parameter for
-  [`Seurat::FindClusters`](https://satijalab.org/seurat/reference/FindClusters.html)
+  [`Seurat::FindClusters`](https://rdrr.io/pkg/Seurat/man/FindClusters.html)
 
 - louvain.alg:
 
   the `algorithm` parameter for
-  [`Seurat::FindClusters`](https://satijalab.org/seurat/reference/FindClusters.html)
+  [`Seurat::FindClusters`](https://rdrr.io/pkg/Seurat/man/FindClusters.html)
 
 - seed.cluster:
 
   the `random.seed` parameter for
-  [`Seurat::FindClusters`](https://satijalab.org/seurat/reference/FindClusters.html)
+  [`Seurat::FindClusters`](https://rdrr.io/pkg/Seurat/man/FindClusters.html)
 
 - kmeans.whiten:
 
@@ -95,12 +95,12 @@ perform_clustering(
 - npcs:
 
   number of PCs, the parameter `npcs` used in
-  [`Seurat::RunPCA`](https://satijalab.org/seurat/reference/RunPCA.html)
+  [`Seurat::RunPCA`](https://rdrr.io/pkg/Seurat/man/RunPCA.html)
 
 - k.param:
 
   the parameter `k.param` used in
-  [`Seurat::FindNeighbors`](https://satijalab.org/seurat/reference/FindNeighbors.html)
+  [`Seurat::FindNeighbors`](https://rdrr.io/pkg/Seurat/man/FindNeighbors.html)
 
 - test.use:
 

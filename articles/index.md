@@ -8,4 +8,5 @@
   Types](https://hohoweiya.xyz/SplitClusterTest/articles/two-cell-types.md):
 - [Two
   Gaussians](https://hohoweiya.xyz/SplitClusterTest/articles/two-gaussians.md):
-- [Two-Poissons](https://hohoweiya.xyz/SplitClusterTest/articles/two-poissons.md):
+- [Two
+  Poissons](https://hohoweiya.xyz/SplitClusterTest/articles/two-poissons.md):

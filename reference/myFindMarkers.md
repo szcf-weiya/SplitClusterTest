@@ -1,7 +1,7 @@
 # Gene expression markers of identity classes
 
 Wrapper for
-[`Seurat::FindMarkers`](https://satijalab.org/seurat/reference/FindMarkers.html)
+[`Seurat::FindMarkers`](https://rdrr.io/pkg/Seurat/man/FindMarkers.html)
 that uses modified (extended) tests
 
 ## Usage

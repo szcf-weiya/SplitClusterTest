@@ -9,16 +9,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/szcf-weiya/SplitClusterTest/blob/v0.1.3/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/szcf-weiya/SplitClusterTest/blob/master/DESCRIPTION)
 
 Wang L, Lin Y (2026). *SplitClusterTest: FDR Control via Data Splitting
-for Testing-after-Clustering*. R package version 0.1.3,
+for Testing-after-Clustering*. R package version 0.1.4,
 <https://github.com/szcf-weiya/SplitClusterTest>.
 
     @Manual{,
       title = {SplitClusterTest: FDR Control via Data Splitting for Testing-after-Clustering},
       author = {Lijun Wang and Yingxin Lin},
       year = {2026},
-      note = {R package version 0.1.3},
+      note = {R package version 0.1.4},
       url = {https://github.com/szcf-weiya/SplitClusterTest},
     }

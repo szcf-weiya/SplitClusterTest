@@ -1,4 +1,4 @@
-# Two-Poissons
+# Two Poissons
 
 ``` r
 library(SplitClusterTest)

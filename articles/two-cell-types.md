@@ -332,7 +332,7 @@ sessionInfo()
 #> [1] stats     graphics  grDevices datasets  utils     methods   base     
 #> 
 #> other attached packages:
-#> [1] future_1.69.0          SplitClusterTest_0.1.3
+#> [1] future_1.69.0          SplitClusterTest_0.1.4
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] copula_1.1-6                spatstat.univar_3.0-1      
@@ -349,7 +349,7 @@ sessionInfo()
 #>  [23] matrixStats_1.4.1           stabledist_0.7-2           
 #>  [25] pkgdown_2.2.0               spatstat.sparse_3.1-0      
 #>  [27] colorspace_2.1-1            ggrepel_0.9.6              
-#>  [29] textshaping_0.4.0           xfun_0.55                  
+#>  [29] textshaping_0.4.0           xfun_0.56                  
 #>  [31] dplyr_1.1.4                 RCurl_1.98-1.16            
 #>  [33] jsonlite_1.8.9              progressr_0.14.0           
 #>  [35] spatstat.data_3.1-2         survival_3.2-13            

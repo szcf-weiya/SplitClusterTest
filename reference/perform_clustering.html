@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SplitClusterTest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/one-cell-type.html">One Cell Type</a></li>
     <li><a class="dropdown-item" href="../articles/two-cell-types.html">Two Cell Types</a></li>
     <li><a class="dropdown-item" href="../articles/two-gaussians.html">Two Gaussians</a></li>
-    <li><a class="dropdown-item" href="../articles/two-poissons.html">Two-Poissons</a></li>
+    <li><a class="dropdown-item" href="../articles/two-poissons.html">Two Poissons</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -35,7 +35,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Perform Clustering on a SingleCellExperiment object</h1>
-      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/v0.1.3/R/split_cluster_test.R" class="external-link"><code>R/split_cluster_test.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/szcf-weiya/SplitClusterTest/blob/master/R/split_cluster_test.R" class="external-link"><code>R/split_cluster_test.R</code></a></small>
       <div class="d-none name"><code>perform_clustering.Rd</code></div>
     </div>
 
@@ -85,7 +85,7 @@
 
 
 <dt id="arg-use-kmeans">use.kmeans<a class="anchor" aria-label="anchor" href="#arg-use-kmeans"></a></dt>
-<dd><p>if <code>TRUE</code>, then clustering using kmeans with two clusters, otherwise, use <code><a href="https://satijalab.org/seurat/reference/FindClusters.html" class="external-link">Seurat::FindClusters</a></code> and need to find <code>resolution</code> to achieve two clusters</p></dd>
+<dd><p>if <code>TRUE</code>, then clustering using kmeans with two clusters, otherwise, use <code><a href="https://rdrr.io/pkg/Seurat/man/FindClusters.html" class="external-link">Seurat::FindClusters</a></code> and need to find <code>resolution</code> to achieve two clusters</p></dd>
 
 
 <dt id="arg-kmeans-nstart">kmeans.nstart<a class="anchor" aria-label="anchor" href="#arg-kmeans-nstart"></a></dt>
@@ -93,7 +93,7 @@
 
 
 <dt id="arg-resolution">resolution<a class="anchor" aria-label="anchor" href="#arg-resolution"></a></dt>
-<dd><p>the <code>resolution</code> parameter for <code><a href="https://satijalab.org/seurat/reference/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
+<dd><p>the <code>resolution</code> parameter for <code><a href="https://rdrr.io/pkg/Seurat/man/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
 
 
 <dt id="arg-step">step<a class="anchor" aria-label="anchor" href="#arg-step"></a></dt>
@@ -105,15 +105,15 @@
 
 
 <dt id="arg-louvain-nstart">louvain.nstart<a class="anchor" aria-label="anchor" href="#arg-louvain-nstart"></a></dt>
-<dd><p>the <code>n.start</code> parameter for <code><a href="https://satijalab.org/seurat/reference/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
+<dd><p>the <code>n.start</code> parameter for <code><a href="https://rdrr.io/pkg/Seurat/man/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
 
 
 <dt id="arg-louvain-alg">louvain.alg<a class="anchor" aria-label="anchor" href="#arg-louvain-alg"></a></dt>
-<dd><p>the <code>algorithm</code> parameter for <code><a href="https://satijalab.org/seurat/reference/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
+<dd><p>the <code>algorithm</code> parameter for <code><a href="https://rdrr.io/pkg/Seurat/man/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
 
 
 <dt id="arg-seed-cluster">seed.cluster<a class="anchor" aria-label="anchor" href="#arg-seed-cluster"></a></dt>
-<dd><p>the <code>random.seed</code> parameter for <code><a href="https://satijalab.org/seurat/reference/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
+<dd><p>the <code>random.seed</code> parameter for <code><a href="https://rdrr.io/pkg/Seurat/man/FindClusters.html" class="external-link">Seurat::FindClusters</a></code></p></dd>
 
 
 <dt id="arg-kmeans-whiten">kmeans.whiten<a class="anchor" aria-label="anchor" href="#arg-kmeans-whiten"></a></dt>
@@ -125,11 +125,11 @@
 
 
 <dt id="arg-npcs">npcs<a class="anchor" aria-label="anchor" href="#arg-npcs"></a></dt>
-<dd><p>number of PCs, the parameter <code>npcs</code> used in <code><a href="https://satijalab.org/seurat/reference/RunPCA.html" class="external-link">Seurat::RunPCA</a></code></p></dd>
+<dd><p>number of PCs, the parameter <code>npcs</code> used in <code><a href="https://rdrr.io/pkg/Seurat/man/RunPCA.html" class="external-link">Seurat::RunPCA</a></code></p></dd>
 
 
 <dt id="arg-k-param">k.param<a class="anchor" aria-label="anchor" href="#arg-k-param"></a></dt>
-<dd><p>the parameter <code>k.param</code> used in <code><a href="https://satijalab.org/seurat/reference/FindNeighbors.html" class="external-link">Seurat::FindNeighbors</a></code></p></dd>
+<dd><p>the parameter <code>k.param</code> used in <code><a href="https://rdrr.io/pkg/Seurat/man/FindNeighbors.html" class="external-link">Seurat::FindNeighbors</a></code></p></dd>
 
 
 <dt id="arg-test-use">test.use<a class="anchor" aria-label="anchor" href="#arg-test-use"></a></dt>
