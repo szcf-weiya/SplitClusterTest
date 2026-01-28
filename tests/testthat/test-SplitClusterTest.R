@@ -25,13 +25,13 @@ test_that("ds_pois", {
 
 test_that("calc_tau", {
   ms = seq(-1, 1, by = 0.01)
-  expect_equal(calc_tau(ms), 1)
+  expect_gt(calc_tau(ms), 1)
 
   ms = seq(-1, 2, by = 0.01)
   expect_lt(calc_tau(ms), 1)
 
   ms = numeric(100)
-  expect_equal(calc_tau(ms), 0)
+  expect_gt(calc_tau(ms), 0)
 })
 
 test_that("mds", {

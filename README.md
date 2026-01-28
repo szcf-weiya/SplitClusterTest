@@ -35,3 +35,4 @@ For potential compatibility issues, you may need to install `Matrix` with versio
 
 - The Julia implementation: <https://github.com/szcf-weiya/SplitClusterTest.jl>
 - For the comparison between data splitting and data fission, check <https://github.com/szcf-weiya/fission_vs_splitting>.
+- The R code of the data splitting procedure in the regression setting: <https://github.com/Jeremy690/DSfdr>
