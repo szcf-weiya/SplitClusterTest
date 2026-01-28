@@ -84,3 +84,11 @@ test_that("calc_acc", {
   expect_equal(acc[["power"]], 0)
   expect_equal(acc[["f1"]], 0)
 })
+
+test_that("est.Sigma", {
+  x = rbind(matrix(rnorm(100), 50, 2), matrix(rnorm(100) + 4, 50, 2))
+  S = est.Sigma(x)
+  S0 = diag(2)
+  S1 = cov(x)
+  expect_lt(norm(S - S0), norm(S1 - S0))
+})

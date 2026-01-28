@@ -141,7 +141,7 @@ dd = function(sce, params, test.use = "t", q = 0.05) {
 #' @export
 calc_tau = function(ms, q = 0.05) {
   ts = unique(sort(abs(ms)))
-  cutoff_set = max(ms)
+  cutoff_set = max(ms) + 1 # since the selection is >=, avoid max(ms) to be selected if no proper cutoff
   for (t in ts) {
     curr_fdr = (1 + sum(ms <= -t)) / max(1, sum(ms >= t))
     if (curr_fdr <= q)
